@@ -27,54 +27,8 @@ What sets us apart:
 
 ---
 
-## Why We Built It
-
-Freelance platforms today are optimized for low-barrier volume — throw a job up, get hundreds of proposals, spend hours filtering noise. We wanted the opposite: fewer choices, higher quality, faster outcomes.
-
-The result is **aiomniu**.
-
----
-
-## Tech That Powers Us
-
-| Layer | Technology | Why |
-| --- | --- | --- |
-| Frontend | Next.js 15 + TanStack Query | SSR for SEO, client caching for speed |
-| Backend | Python 3.12 + FastAPI | Type-safe APIs, async-native |
-| Runtime | Pyodide on Cloudflare Workers | Python at the edge, ~50ms TTFB worldwide |
-| Database | Cloudflare D1 (SQLite) | SQL we know, global replication, zero-ops |
-| Storage | Cloudflare R2 | S3-compatible, zero egress fees |
-| Auth | SHA256 + salt + JWT | Stateless auth, no session servers |
-
-### Running Python on the Edge: Pyodide in Production
-
-One of the more unusual pieces of our stack: we run Python via Pyodide inside Cloudflare Workers. It's not trivial — we hit and worked around:
-
-- No threading support → all handlers `async def`
-- `__import__` broken in workerd → static imports only
-- SQL NULL → `{}` in transit → custom null cleanup layer
-- ASGI 1.9.3 pinning → manual bridge for newer versions
-
-We wrote about the full journey: [Dev.to post coming soon].
-
----
-
-## Traction
-
-As of July 2026:
-
-- **300+** SEO-optimized landing pages live
-- **60+** cities and **20+** skill categories covered
-- **24** competitor alternative pages (Upwork, Fiverr, etc.)
-- Migrated from Vue SPA to Next.js SSR for better crawlability
-
----
-
 ## Links
 
 - Website: [aiomniu.top](https://aiomniu.top)
 - Contact: support@aiomniu.top
 
----
-
-*Built on Cloudflare Workers, FastAPI, and Next.js. Not open source — this repo documents the stack and approach.*
